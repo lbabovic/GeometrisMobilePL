@@ -62,10 +62,10 @@ public class WQScanner {
      * @param scanDuration scan duration in milliseconds before timing out.
      */
     @RequiresPermission(allOf = {"android.permission.BLUETOOTH", "android.permission.BLUETOOTH_ADMIN"})
-    public void start(long scanDuration) {
+    public void start(long scanDuration, int scanMode) {
         Log.d(TAG, "Scan Started ...");
         BluetoothLeScannerCompat scanner = BluetoothLeScannerCompat.getScanner();
-        ScanSettings settings = (new Builder()).setScanMode(2).setReportDelay(scanDuration).setUseHardwareBatchingIfSupported(false).setUseHardwareFilteringIfSupported(false).build();
+        ScanSettings settings = (new Builder()).setScanMode(scanMode).setReportDelay(scanDuration).setUseHardwareBatchingIfSupported(false).setUseHardwareFilteringIfSupported(false).build();
         List<ScanFilter> filters = new ArrayList();
         ParcelUuid mUuid = WQSmartService.WQSmartUuid.OBD_SERVICE.getParcelable();
         filters.add((new no.nordicsemi.android.support.v18.scanner.ScanFilter.Builder()).setServiceUuid(mUuid).build());
